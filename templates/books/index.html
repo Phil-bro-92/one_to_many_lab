@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block content %} {% for book in books %}
+<div class="book">
+  <div class="content">
+    {{book.author.first_name}} {{book.author.last_name}}
+    <div class="title">
+      <a href="/books/{{book.id}}">{{book.title}}</a>
+      <span class="genre"><b>Genre:</b> {{book.genre}}</span>
+      <p><b>Pages: </b> {{book.pages}}</p>
+    </div>
+    <div class="buttons">
+      <form
+        class="delete-form"
+        action="/books/{{book.id}}/delete"
+        method="post"
+      >
+        <button class="trash-button">
+          <i
+            class="fa fa-trash-o fa-3x"
+            style="color: red"
+            aria-hidden="true"
+          ></i>
+        </button>
+      </form>
+      {% if book.read == True%}
+      <i class="fa fa-check fa-2x" style="color: green" aria-hidden="true"></i>
+      {% else %}
+      <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endfor %} {% endblock %}
